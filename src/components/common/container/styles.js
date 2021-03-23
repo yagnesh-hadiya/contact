@@ -2,6 +2,6 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
     wrapper: {
-        padding: 100,
+        padding: 20,
     },
 });
