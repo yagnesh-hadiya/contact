@@ -24,7 +24,7 @@ const Input = ({ style, icon, onChangeText, error, value, lable, iconPosition, .
         if (focused) {
             return colors.primary;
         }
-         else {
+        else {
             return colors.grey;
         }
     }

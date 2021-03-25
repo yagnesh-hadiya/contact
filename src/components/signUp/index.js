@@ -7,7 +7,7 @@ import { LOGIN } from '../../constants/routeNames';
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
 
-const SignUp = ({ onSubmit, onChange, form, error }) => {
+const SignUp = ({ onSubmit, onChange, form, error, errors, loading }) => {
     const { navigate } = useNavigation();
     return (
         <Container>
@@ -22,7 +22,7 @@ const SignUp = ({ onSubmit, onChange, form, error }) => {
                     <Input lable='UserName'
                         iconPosition="right"
                         placeholder='Enter Username'
-                        error={error.userName}
+                        error={errors.userName}
                         onChangeText={(value) => {
                             onChange({ name: 'userName', value })
                         }}
@@ -34,12 +34,12 @@ const SignUp = ({ onSubmit, onChange, form, error }) => {
                         onChangeText={(value) => {
                             onChange({ name: 'firstName', value })
                         }}
-                        error={error.firstName}
+                        error={errors.firstName}
                     />
                     <Input lable='LastName'
                         iconPosition="right"
                         placeholder='Enter LastName'
-                        error={error.lastName}
+                        error={errors.lastName}
                         onChangeText={(value) => {
                             onChange({ name: 'lastName', value })
                         }}
@@ -47,7 +47,7 @@ const SignUp = ({ onSubmit, onChange, form, error }) => {
                     <Input lable='Email'
                         iconPosition="right"
                         placeholder='Enter Email'
-                        error={error.email}
+                        error={errors.email}
                         onChangeText={(value) => {
                             onChange({ name: 'email', value })
                         }}
@@ -57,12 +57,14 @@ const SignUp = ({ onSubmit, onChange, form, error }) => {
                         iconPosition="right"
                         placeholder='Enter Password'
                         secureTextEntry={true}
-                        error={error.password}
+                        error={errors.password}
                         onChangeText={(value) => {
                             onChange({ name: 'password', value })
                         }}
                     />
-                    <Button primary title='Submit' onPress={onSubmit} />
+                     
+                     {console.log('error',error)}
+                    <Button primary title='Submit' onPress={onSubmit} loading={loading} disabled={loading} />
 
                     <View style={styles.createSection}>
                         <Text style={styles.infoText}>Already have an account?</Text>

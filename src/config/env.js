@@ -8,4 +8,4 @@ const prodEnvVariable = {
     PROD_BACKEND_URL
 }
 
-export default _DEV_ ? devEnvVariable : prodEnvVariable;
+export default __DEV__ ? devEnvVariable : prodEnvVariable;

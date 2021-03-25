@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import SignUpComponents from '../../components/signUp';
+import register from '../../context/actions/auth/register';
+import { globalContext } from '../../context/provider';
 
 const Register = () => {
     const [form, setForm] = useState({});
-    const [error, setError] = useState({});
+    const [errors, setError] = useState({});
+    const { authDispatch, authState: { error, loading, data } } = useContext(globalContext);
+
+    // console.log('authState:>', authState)
 
     const onChange = ({ name, value }) => {
         setForm({ ...form, [name]: value });
@@ -37,25 +42,31 @@ const Register = () => {
                 return { ...prev, userName: 'Please add a username' }
             })
         }
-         if (!form.firstName) {
+        if (!form.firstName) {
             setError((prev) => {
                 return { ...prev, firstName: 'Please add a firstName' }
             })
         }
-         if (!form.lastName) {
+        if (!form.lastName) {
             setError((prev) => {
                 return { ...prev, lastName: 'Please add a lastName' }
             })
         }
-         if (!form.email) {
+        if (!form.email) {
             setError((prev) => {
                 return { ...prev, email: 'Please add a email' }
             })
         }
-         if (!form.password) {
+        if (!form.password) {
             setError((prev) => {
                 return { ...prev, password: 'Please add a password' }
             })
+        }
+        if (Object.values(form).length === 5 &&
+            Object.values(form).every(item => item.trim().length > 0) &&
+            Object.values(console.error).every((item) => !item)
+        ) {
+            register(form)(authDispatch);
         }
     }
 
@@ -66,6 +77,8 @@ const Register = () => {
             onSubmit={onSubmit}
             form={form}
             error={error}
+            errors={errors}
+            loading={loading}
         />
     );
 }
