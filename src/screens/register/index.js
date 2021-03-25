@@ -1,5 +1,7 @@
-import React, { useContext, useState } from 'react';
+import { useNavigation } from '@react-navigation/core';
+import React, { useContext, useEffect, useState } from 'react';
 import SignUpComponents from '../../components/signUp';
+import { LOGIN } from '../../constants/routeNames';
 import register from '../../context/actions/auth/register';
 import { globalContext } from '../../context/provider';
 
@@ -7,12 +9,18 @@ const Register = () => {
     const [form, setForm] = useState({});
     const [errors, setError] = useState({});
     const { authDispatch, authState: { error, loading, data } } = useContext(globalContext);
+    const { navigate } = useNavigation();
 
-    // console.log('authState:>', authState)
+    // useEffect(() => {
+    //     if (data) {
+    //         navigate(LOGIN)
+    //     }
+    // }, [data]);
 
     const onChange = ({ name, value }) => {
         setForm({ ...form, [name]: value });
-
+        console.log('error:>>', error);
+        console.log('data', data);
         if (value !== '') {
             if (name === 'password') {
                 if (value.length < 6) {

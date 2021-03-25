@@ -2,9 +2,9 @@ import { REGISTER_FAIL, REGISTER_LOADING, REGISTER_SUCCESS } from "../../../cons
 import axiosInstance from "../../../helpers/axiosInterceptor";
 
 export default ({
-    userName,
-    firsName,
-    lastName,
+    userName:username,
+    firstName: first_name,
+    lastName: last_name,
     email,
     password
 }) => dispatch => {
@@ -12,9 +12,9 @@ export default ({
         type: REGISTER_LOADING,
     })
     axiosInstance.post('auth/register', {
-        userName,
-        firsName,
-        lastName,
+        username,
+        first_name,
+        last_name,
         email,
         password
     }).then(res => {
@@ -27,7 +27,7 @@ export default ({
         // console.log(('err',err))
         dispatch({
             type: REGISTER_FAIL,
-            payload:err.response? err.response.data:{error:"Something"},
+            payload: err.response ? err.response.data : { error: "Something went wrong try again.." },
 
         })
     })

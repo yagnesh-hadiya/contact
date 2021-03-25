@@ -19,10 +19,11 @@ const SignUp = ({ onSubmit, onChange, form, error, errors, loading }) => {
                 <Text style={styles.title}>Welcome to RnContacts</Text>
                 <Text style={styles.subTitle}>Create a new account</Text>
                 <View style={styles.form}>
+                    {error?.error && <Text>{error.error}</Text>}
                     <Input lable='UserName'
                         iconPosition="right"
                         placeholder='Enter Username'
-                        error={errors.userName}
+                        error={errors.userName || error?.userName?.[0]}
                         onChangeText={(value) => {
                             onChange({ name: 'userName', value })
                         }}
@@ -34,12 +35,12 @@ const SignUp = ({ onSubmit, onChange, form, error, errors, loading }) => {
                         onChangeText={(value) => {
                             onChange({ name: 'firstName', value })
                         }}
-                        error={errors.firstName}
+                        error={errors.firstName|| error?.firstName?.[0]}
                     />
                     <Input lable='LastName'
                         iconPosition="right"
                         placeholder='Enter LastName'
-                        error={errors.lastName}
+                        error={errors.lastName|| error?.lastName?.[0]}
                         onChangeText={(value) => {
                             onChange({ name: 'lastName', value })
                         }}
@@ -47,7 +48,7 @@ const SignUp = ({ onSubmit, onChange, form, error, errors, loading }) => {
                     <Input lable='Email'
                         iconPosition="right"
                         placeholder='Enter Email'
-                        error={errors.email}
+                        error={errors.email || error?.email?.[0]}
                         onChangeText={(value) => {
                             onChange({ name: 'email', value })
                         }}
@@ -57,13 +58,14 @@ const SignUp = ({ onSubmit, onChange, form, error, errors, loading }) => {
                         iconPosition="right"
                         placeholder='Enter Password'
                         secureTextEntry={true}
-                        error={errors.password}
+                        error={errors.password|| error?.password?.[0]}
                         onChangeText={(value) => {
                             onChange({ name: 'password', value })
                         }}
                     />
-                     
-                     {console.log('error',error)}
+
+                    {console.log('error', error)}
+
                     <Button primary title='Submit' onPress={onSubmit} loading={loading} disabled={loading} />
 
                     <View style={styles.createSection}>
